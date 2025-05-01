@@ -11,6 +11,8 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
 
+#include "Scene/trig_scene.h"
+
 int main ()
 {
 	// Tell the window to use vsync and work on high DPI displays
@@ -26,34 +28,18 @@ int main ()
 
 	// Load a texture from the resources directory
 	Texture wabbit = LoadTexture("wabbit_alpha.png");
-	
-	Camera2D camera;
-	camera.offset = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 };
-	camera.target = Vector2{ 0, 0 };
-	camera.rotation = 0.0f;
-	camera.zoom = 1.0f;
+
+	TrigScene* scene = new TrigScene("Trig Scene", screenWidth, screenHeight);
+	scene->Initialize();
 
 	// game loop
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 	{
-		// drawing
-		BeginDrawing();
-
-		// Setup the back buffer for drawing (clear color and depth buffers)
-		ClearBackground(BLACK);
-
-		// draw some text using the default font
-		DrawText("Hello Raylib", 200,200,20,WHITE);
-
-		// draw our texture to the screen
-		DrawTexture(wabbit, 400, 200, WHITE);
-
-		DrawCircleV(GetMousePosition(), 100, BLUE);
-
-		DrawCircleGradient(400, 200, 100, PINK, PURPLE);
-		
-		// end the frame and get ready for the next one  (display frame, poll input, etc...)
-		EndDrawing();
+		scene->Update();
+		scene->BeginDraw();
+		scene->Draw();
+		scene->DrawGUI();
+		scene->EndDraw();
 	}
 
 	// cleanup
