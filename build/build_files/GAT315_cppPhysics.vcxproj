@@ -529,12 +529,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\resource_dir.h" />
-    <ClInclude Include="..\..\src\scene.h" />
+    <ClInclude Include="..\..\src\Coordinates\Polar.h" />
+    <ClInclude Include="..\..\src\Scene\PolarScene.h" />
+    <ClInclude Include="..\..\src\Scene\scene.h" />
     <ClInclude Include="..\..\src\Scene\scene_camera.h" />
     <ClInclude Include="..\..\src\Scene\trig_scene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\Scene\PolarScene.cpp" />
     <ClCompile Include="..\..\src\Scene\scene.cpp" />
     <ClCompile Include="..\..\src\Scene\scene_camera.cpp" />
     <ClCompile Include="..\..\src\Scene\trig_scene.cpp" />
