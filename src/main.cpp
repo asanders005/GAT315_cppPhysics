@@ -13,6 +13,7 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 
 #include "Scene/trig_scene.h"
 #include "Scene/PolarScene.h"
+#include "Scene/VectorScene.h"
 
 int main ()
 {
@@ -30,8 +31,9 @@ int main ()
 	// Load a texture from the resources directory
 	Texture wabbit = LoadTexture("wabbit_alpha.png");
 
-	//TrigScene* scene = new TrigScene("Trig Scene", screenWidth, screenHeight);
-	PolarScene* scene = new PolarScene("Polar Scene", screenWidth, screenHeight);
+	//Scene* scene = new TrigScene("Trig Scene", screenWidth, screenHeight);
+	//Scene* scene = new PolarScene("Polar Scene", screenWidth, screenHeight);
+	Scene* scene = new VectorScene("Vector Scene", screenWidth, screenHeight);
 	scene->Initialize();
 
 	// game loop
@@ -43,9 +45,9 @@ int main ()
 		//scene->DrawArchimedeanSpiral(0.2f, 0.5f, 20);
 		//scene->DrawCardioid(3.0f, 20);
 		//scene->DrawLimacon(3.0f, 5, 20);
-		scene->DrawRose(3.0f, 7, 20);
+		//scene->DrawRose(3.0f, 7, 20);
 
-		//scene->Draw();
+		scene->Draw();
 		scene->DrawGUI();
 		scene->EndDraw();
 	}

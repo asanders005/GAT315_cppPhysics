@@ -13,6 +13,9 @@
     <Filter Include="Source Files\Coordinates">
       <UniqueIdentifier>{a4652139-98cd-462b-a2af-f33ec8413638}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Objects">
+      <UniqueIdentifier>{2a679cdf-e7b1-458a-a2d1-f6ebcf35261c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\resource_dir.h">
@@ -33,6 +36,12 @@
     <ClInclude Include="..\..\src\Scene\PolarScene.h">
       <Filter>Source Files\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\Scene\VectorScene.h">
+      <Filter>Source Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Objects\Body.h">
+      <Filter>Source Files\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
@@ -47,6 +56,14 @@
     <ClCompile Include="..\..\src\Scene\scene.cpp">
       <Filter>Source Files\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Scene\PolarScene.cpp" />
+    <ClCompile Include="..\..\src\Scene\PolarScene.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Objects\Body.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Scene\VectorScene.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
