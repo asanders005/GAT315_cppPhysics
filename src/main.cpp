@@ -32,8 +32,8 @@ int main ()
 	Texture wabbit = LoadTexture("wabbit_alpha.png");
 
 	//Scene* scene = new TrigScene("Trig Scene", screenWidth, screenHeight);
-	//Scene* scene = new PolarScene("Polar Scene", screenWidth, screenHeight);
-	Scene* scene = new VectorScene("Vector Scene", screenWidth, screenHeight);
+	Scene* scene = new PolarScene("Polar Scene", screenWidth, screenHeight);
+	//Scene* scene = new VectorScene("Vector Scene", screenWidth, screenHeight);
 	scene->Initialize();
 
 	// game loop
@@ -41,12 +41,6 @@ int main ()
 	{
 		scene->Update();
 		scene->BeginDraw();
-
-		//scene->DrawArchimedeanSpiral(0.2f, 0.5f, 20);
-		//scene->DrawCardioid(3.0f, 20);
-		//scene->DrawLimacon(3.0f, 5, 20);
-		//scene->DrawRose(3.0f, 7, 20);
-
 		scene->Draw();
 		scene->DrawGUI();
 		scene->EndDraw();
