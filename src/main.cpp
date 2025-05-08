@@ -11,7 +11,7 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
 
-#include "Scene/trig_scene.h"
+#include "Scene/TrigScene.h"
 #include "Scene/PolarScene.h"
 #include "Scene/VectorScene.h"
 
@@ -32,8 +32,8 @@ int main ()
 	Texture wabbit = LoadTexture("wabbit_alpha.png");
 
 	//Scene* scene = new TrigScene("Trig Scene", screenWidth, screenHeight);
-	Scene* scene = new PolarScene("Polar Scene", screenWidth, screenHeight);
-	//Scene* scene = new VectorScene("Vector Scene", screenWidth, screenHeight);
+	//Scene* scene = new PolarScene("Polar Scene", screenWidth, screenHeight);
+	Scene* scene = new VectorScene("Vector Scene", screenWidth, screenHeight);
 	scene->Initialize();
 
 	// game loop

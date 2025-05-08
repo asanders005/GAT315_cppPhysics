@@ -16,18 +16,24 @@
     <Filter Include="Source Files\Objects">
       <UniqueIdentifier>{2a679cdf-e7b1-458a-a2d1-f6ebcf35261c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Patterns">
+      <UniqueIdentifier>{a953f7b5-122f-4565-add6-41dd32f5544a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utitlity">
+      <UniqueIdentifier>{279104d0-8fc4-475d-a52b-1cb515dc3f31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\resource_dir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\Scene\trig_scene.h">
+    <ClInclude Include="..\..\src\Scene\TrigScene.h">
       <Filter>Source Files\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\Scene\scene_camera.h">
+    <ClInclude Include="..\..\src\Scene\Scene_camera.h">
       <Filter>Source Files\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\Scene\scene.h">
+    <ClInclude Include="..\..\src\Scene\Scene.h">
       <Filter>Source Files\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\Coordinates\Polar.h">
@@ -42,18 +48,27 @@
     <ClInclude Include="..\..\src\Objects\Body.h">
       <Filter>Source Files\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\Objects\World.h">
+      <Filter>Source Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Patterns\Pool.h">
+      <Filter>Source Files\Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Utility\MathUtils.h">
+      <Filter>Source Files\Utitlity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Scene\trig_scene.cpp">
+    <ClCompile Include="..\..\src\Scene\TrigScene.cpp">
       <Filter>Source Files\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Scene\scene_camera.cpp">
+    <ClCompile Include="..\..\src\Scene\Scene_camera.cpp">
       <Filter>Source Files\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Scene\scene.cpp">
+    <ClCompile Include="..\..\src\Scene\Scene.cpp">
       <Filter>Source Files\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Scene\PolarScene.cpp">
@@ -64,6 +79,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Scene\VectorScene.cpp">
       <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Objects\World.cpp">
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

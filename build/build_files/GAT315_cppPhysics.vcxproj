@@ -531,19 +531,23 @@
     <ClInclude Include="..\..\include\resource_dir.h" />
     <ClInclude Include="..\..\src\Coordinates\Polar.h" />
     <ClInclude Include="..\..\src\Objects\Body.h" />
+    <ClInclude Include="..\..\src\Objects\World.h" />
+    <ClInclude Include="..\..\src\Patterns\Pool.h" />
     <ClInclude Include="..\..\src\Scene\PolarScene.h" />
-    <ClInclude Include="..\..\src\Scene\scene.h" />
-    <ClInclude Include="..\..\src\Scene\scene_camera.h" />
-    <ClInclude Include="..\..\src\Scene\trig_scene.h" />
+    <ClInclude Include="..\..\src\Scene\Scene.h" />
+    <ClInclude Include="..\..\src\Scene\Scene_camera.h" />
+    <ClInclude Include="..\..\src\Scene\TrigScene.h" />
     <ClInclude Include="..\..\src\Scene\VectorScene.h" />
+    <ClInclude Include="..\..\src\Utility\MathUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\Objects\Body.cpp" />
+    <ClCompile Include="..\..\src\Objects\World.cpp" />
     <ClCompile Include="..\..\src\Scene\PolarScene.cpp" />
-    <ClCompile Include="..\..\src\Scene\scene.cpp" />
-    <ClCompile Include="..\..\src\Scene\scene_camera.cpp" />
-    <ClCompile Include="..\..\src\Scene\trig_scene.cpp" />
+    <ClCompile Include="..\..\src\Scene\Scene.cpp" />
+    <ClCompile Include="..\..\src\Scene\Scene_camera.cpp" />
+    <ClCompile Include="..\..\src\Scene\TrigScene.cpp" />
     <ClCompile Include="..\..\src\Scene\VectorScene.cpp" />
   </ItemGroup>
   <ItemGroup>

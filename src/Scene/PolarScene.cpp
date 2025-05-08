@@ -93,10 +93,10 @@ void PolarScene::DrawGUI()
 	default:
 		break;
 	}
-	
+
 	Scene::DrawText("Type: " + polarTypeName, Vector2{ -8.75f, 4.95f }, 40, WHITE);
 	Scene::DrawText(sizeName + std::to_string(m_size), Vector2{ -8.75f, 4.45f }, 40, WHITE);
-	if (uniqueName != "") Scene::DrawText(uniqueName + std::to_string(m_unique), Vector2{-8.75f, 3.95f}, 40, WHITE);
+	if (uniqueName != "") Scene::DrawText(uniqueName + std::to_string(m_unique), Vector2{ -8.75f, 3.95f }, 40, WHITE);
 	Scene::DrawText("Theta: " + std::to_string(m_theta), Vector2{ -8.75f, 3.45f }, 40, WHITE);
 	Scene::DrawText("Speed: " + std::to_string(m_rate), Vector2{ -8.75f, 2.95f }, 40, WHITE);
 
@@ -109,7 +109,7 @@ void PolarScene::DrawArchimedeanSpiral(float startRadius, float spacing, float t
 	for (float i = 0; i < theta; i += 0.2f)
 	{
 		float r = startRadius + (spacing * i);
-		Polar p{ i /** ((float)GetTime() * m_rate)*/, r};
+		Polar p{ i + ((float)GetTime() * m_rate), r };
 
 		Scene::DrawCircle((Vector2)p, 0.1f, m_colors[currentColor]);
 		currentColor = ++currentColor % m_colors.size();
@@ -122,7 +122,7 @@ void PolarScene::DrawCardioid(float size, float theta)
 	for (float i = -theta; i < theta; i += 0.2f)
 	{
 		float r = size * (1 + cosf(i));
-		Polar p{ i, r };
+		Polar p{ i + ((float)GetTime() * m_rate), r };
 
 		Scene::DrawCircle((Vector2)p, 0.1f, m_colors[currentColor]);
 		currentColor = ++currentColor % m_colors.size();
@@ -135,7 +135,7 @@ void PolarScene::DrawLimacon(float loop, float dimple, float theta)
 	for (float i = -theta; i < theta; i += 0.2f)
 	{
 		float r = loop + (dimple * cosf(i));
-		Polar p{ i, r };
+		Polar p{ i + ((float)GetTime() * m_rate), r };
 
 		Scene::DrawCircle((Vector2)p, 0.1f, m_colors[currentColor]);
 		currentColor = ++currentColor % m_colors.size();
@@ -148,7 +148,7 @@ void PolarScene::DrawRose(float size, int petalCount, float theta)
 	for (float i = -theta; i < theta; i += 0.2f)
 	{
 		float r = size * cosf(petalCount * i);
-		Polar p{ i, r };
+		Polar p{ i + ((float)GetTime() * m_rate), r };
 
 		Scene::DrawCircle((Vector2)p, 0.1f, m_colors[currentColor]);
 		currentColor = ++currentColor % m_colors.size();
@@ -161,7 +161,7 @@ void PolarScene::DrawLemniscate(float size, float theta)
 	for (float i = -theta; i < theta; i += 0.2f)
 	{
 		float r = size * sqrtf(sinf(2 * i));
-		Polar p{ i, r };
+		Polar p{ i + ((float)GetTime() * m_rate), r };
 
 		Scene::DrawCircle((Vector2)p, 0.1f, m_colors[currentColor]);
 		currentColor = ++currentColor % m_colors.size();

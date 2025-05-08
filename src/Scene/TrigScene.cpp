@@ -1,4 +1,4 @@
-#include "trig_scene.h"
+#include "TrigScene.h"
 #include "raymath.h"
 
 void TrigScene::Initialize()
@@ -10,15 +10,7 @@ void TrigScene::Update()
 {
 }
 
-float DegToRad(float degrees)
-{
-	return degrees * (PI / 180.0f);
-}
 
-float RadToDeg(float radians)
-{
-	return radians * (180.0f / PI);
-}
 
 //Vector2& Vector2Normalize(const Vector2& v)
 //{

@@ -1,77 +1,42 @@
 #include "VectorScene.h"
 #include "Objects/Body.h"
+#include "Utility/MathUtils.h"
 
 #include "raymath.h"
 #include <time.h>
-
-float Random()
-{
-	return rand() / (float)RAND_MAX;
-}
 
 void VectorScene::Initialize()
 {
 	srand(time(0));
 
 	m_camera = new SceneCamera(Vector2{ m_width / 2.0f, m_height / 2.0f });
-	Body* body = new Body(Vector2{ (Random() * 10) - 5, (Random() * 10) - 5}, Vector2{ 0, 0 }, 0.25f, VIOLET);
-	m_head = body;
-	m_player = body;
-
-	for (int i = 0; i < 10; i++)
-	{
-		Color color;
-		float r = Random();
-		if (r < 0.1f)
-			color = BLUE;
-		else if (r < 0.2f)
-			color = GREEN;
-		else if (r < 0.3f)
-			color = YELLOW;
-		else if (r < 0.4f)
-			color = RED;
-		else if (r < 0.5f)
-			color = ORANGE;
-		else if (r < 0.6f)
-			color = WHITE;
-		else if (r < 0.7f)
-			color = DARKGRAY;
-		else if (r < 0.8f)
-			color = BROWN;
-		else if (r < 0.9f)
-			color = PINK;
-		else
-			color = LIGHTGRAY;
-
-		body->next = new Body(Vector2{ (Random() * 10) - 5, (Random() * 10) - 5}, Vector2{ 0, 0 }, 0.25f, color);
-		body->next->prev = body;
-		body = body->next;
-	}
-
+	m_world = new World();
+	m_world->Initialize();
 }
 
 void VectorScene::Update()
 {
-	Body* current = m_head;
-	
-	// Update the player
-	Vector2 direction{ 0, 0 };
-	direction.x = (IsKeyDown(KEY_D) - IsKeyDown(KEY_A));
-	direction.y = (IsKeyDown(KEY_W) - IsKeyDown(KEY_S));
+	float dt = GetFrameTime();
 
-	m_player->velocity = Vector2Normalize(direction) * 5;
-
-	while (current)
+	float theta = EMath::randomf(EMath::DegToRad(360));
+	if (IsMouseButtonPressed(0))
 	{
-		if (current != m_player)
+		for (int i = 0; i < 100; i++)
 		{
-			Vector2 direction = Vector2Normalize(m_player->position - current->position);
-			current->velocity = direction * 2;
-		}
+			Body* body = m_world->CreateBody(
+				m_camera->ScreenToWorld(GetMousePosition()),
+				EMath::randomf(0.005f, 0.15f),
+				ColorFromHSV(EMath::randomf(0, 360), 1.0f, 1.0f)
+			);
 
-		current->Step(GetFrameTime());
-		current = current->next;
+			float offset = EMath::DegToRad(EMath::randomf(-45, 45));
+			float x = cosf(theta + offset);
+			float y = sinf(theta + offset);
+			body->velocity = Vector2{ x, y } * EMath::randomf(2.0f, 10.0f);
+		}
 	}
+
+	m_world->Step(dt);
 }
 
 void VectorScene::Draw()
@@ -80,12 +45,7 @@ void VectorScene::Draw()
 
 	DrawGrid(10, 5, DARKGRAY);
 
-	Body* current = m_head;
-	while (current)
-	{
-		current->Draw(*this);
-		current = current->next;
-	}
+	m_world->Draw(*this);
 
 	m_camera->EndMode();
 }
