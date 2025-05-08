@@ -16,20 +16,52 @@ void VectorScene::Initialize()
 
 void VectorScene::Update()
 {
+	if (IsKeyPressed(KEY_X))
+	{
+		m_isPaused = !m_isPaused;
+	}
+
+	if (m_isPaused) return;
+
 	float dt = GetFrameTime();
 
-	float theta = EMath::randomf(EMath::DegToRad(360));
-	if (IsMouseButtonPressed(0))
+	if (IsKeyPressed(KEY_SPACE))
 	{
+		m_world->DestroyAll();
+	}
+
+	if (IsKeyPressed(KEY_C))
+	{
+		m_colorType = static_cast<ColorType>(((int)m_colorType + 1) % (int)ColorType::End);
+	}
+
+	if (IsKeyPressed(KEY_V))
+	{
+		m_fireworkType = static_cast<FireworkType>(((int)m_fireworkType + 1) % (int)FireworkType::End);
+	}
+
+	float theta = EMath::randomf(EMath::DegToRad(360));
+	if (IsMouseButtonPressed(0) || IsMouseButtonDown(1))
+	{
+		Color color = ColorFromHSV(EMath::randomf(0, 360), 1.0f, 1.0f);
 		for (int i = 0; i < 100; i++)
 		{
+			if (m_colorType == ColorType::Gradient)
+			{
+				color = ColorFromHSV(ColorToHSV(color).x + 1, 1.0f, 1.0f);
+			}
+			else if (m_colorType == ColorType::Multi)
+			{
+				color = ColorFromHSV(EMath::randomf(0, 360), 1.0f, 1.0f);
+			}
+
 			Body* body = m_world->CreateBody(
 				m_camera->ScreenToWorld(GetMousePosition()),
 				EMath::randomf(0.005f, 0.15f),
-				ColorFromHSV(EMath::randomf(0, 360), 1.0f, 1.0f)
+				color
 			);
 
-			float offset = EMath::DegToRad(EMath::randomf(-45, 45));
+			float offset = (m_fireworkType == FireworkType::Cone) ? EMath::DegToRad(EMath::randomf(-45, 45)) : EMath::DegToRad(EMath::randomf(-180, 180));
 			float x = cosf(theta + offset);
 			float y = sinf(theta + offset);
 			body->velocity = Vector2{ x, y } * EMath::randomf(2.0f, 10.0f);

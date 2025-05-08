@@ -48,4 +48,5 @@ void World::DestroyAll()
 	{
 		delete body;
 	}
+	m_bodies.clear();
 }

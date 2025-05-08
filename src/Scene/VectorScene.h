@@ -15,6 +15,27 @@ public:
 	void DrawGUI() override;
 
 private:
+	enum class FireworkType
+	{
+		Circle,
+		Cone,
+		End
+	};
+
+	enum class ColorType
+	{
+		Single,
+		Gradient,
+		Multi,
+		End
+	};
+
+private:
 	struct Body* m_head{ nullptr };
 	struct Body* m_player{ nullptr };
+
+	FireworkType m_fireworkType{ FireworkType::Circle };
+	ColorType m_colorType{ ColorType::Single };
+
+	bool m_isPaused{ false };
 };
