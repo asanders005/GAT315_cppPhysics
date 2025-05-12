@@ -51,10 +51,10 @@
     <ClInclude Include="..\..\src\Objects\World.h">
       <Filter>Source Files\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\Patterns\Pool.h">
-      <Filter>Source Files\Patterns</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\Utility\MathUtils.h">
+      <Filter>Source Files\Utitlity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Utility\Integrator.h">
       <Filter>Source Files\Utitlity</Filter>
     </ClInclude>
   </ItemGroup>

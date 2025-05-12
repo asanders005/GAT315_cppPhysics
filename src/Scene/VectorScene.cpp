@@ -65,10 +65,30 @@ void VectorScene::Update()
 			float x = cosf(theta + offset);
 			float y = sinf(theta + offset);
 			body->velocity = Vector2{ x, y } * EMath::randomf(2.0f, 10.0f);
+			body->gravityScale = EMath::randomf(0.5f, 1.0f);
 		}
 	}
 
 	m_world->Step(dt);
+
+	for (auto& body : m_world->GetBodies())
+	{
+		if (body->position.y < -5)
+		{
+			body->position.y = -5;
+			body->velocity.y *= -0.5f;
+		}
+		if (body->position.x < -9)
+		{
+			body->position.x = -9;
+			body->velocity.x *= -0.5f;
+		}
+		if (body->position.x > 9)
+		{
+			body->position.x = 9;
+			body->velocity.x *= -0.5f;
+		}
+	}
 }
 
 void VectorScene::Draw()

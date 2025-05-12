@@ -2,6 +2,8 @@
 #include "Body.h"
 #include "Utility/MathUtils.h"
 
+Vector2 World::gravity{ 0, -9.81f };
+
 World::~World()
 {
 	DestroyAll();
@@ -9,7 +11,7 @@ World::~World()
 
 void World::Initialize(size_t poolSize, const Vector2& gravity)
 {
-	m_gravity = gravity;
+	World::gravity = gravity;
 	// Preallocate memory for bodies
 	m_bodies.reserve(poolSize);
 	/*for (size_t i = 0; i < poolSize; ++i)
@@ -31,6 +33,7 @@ void World::Step(float dt)
 	for (auto& body : m_bodies)
 	{
 		body->Step(dt);
+		body->ClearForce();
 	}
 }
 

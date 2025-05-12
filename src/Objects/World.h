@@ -15,7 +15,10 @@ public:
 
 	void DestroyAll();
 
+	std::vector<struct Body*>& GetBodies() { return m_bodies; }
+
+	static Vector2 gravity;
+
 private:
-	Vector2 m_gravity;
 	std::vector<struct Body*> m_bodies;
 };
