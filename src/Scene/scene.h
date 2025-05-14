@@ -13,6 +13,7 @@ public:
 
 	virtual void Initialize() = 0;
 	virtual void Update() = 0;
+	virtual void FixedUpdate() = 0;
 
 	virtual void BeginDraw();
 	virtual void EndDraw();
@@ -23,6 +24,8 @@ public:
 
 	void SetCamera(SceneCamera* camera) { m_camera = camera; }
 	SceneCamera* GetCamera() { return m_camera; }
+
+	static constexpr float fixedTimeStep{ 0.016f }; // 60 FPS
 
 	friend struct Body;
 

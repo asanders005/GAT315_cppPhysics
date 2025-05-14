@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Utitlity">
       <UniqueIdentifier>{279104d0-8fc4-475d-a52b-1cb515dc3f31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{cf3c8c0a-6cdb-49ea-9873-68a708c5f85c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\resource_dir.h">
@@ -82,6 +85,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Objects\World.cpp">
       <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GUI\Gui.cpp">
+      <Filter>Source Files\GUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

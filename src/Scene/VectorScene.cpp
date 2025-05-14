@@ -3,6 +3,7 @@
 #include "Utility/MathUtils.h"
 
 #include "raymath.h"
+#include "raygui.h"
 #include <time.h>
 
 void VectorScene::Initialize()
@@ -56,39 +57,48 @@ void VectorScene::Update()
 			}
 
 			Body* body = m_world->CreateBody(
+				m_bodyType,
 				m_camera->ScreenToWorld(GetMousePosition()),
-				EMath::randomf(0.005f, 0.15f),
+				m_bodyMass,
+				m_bodySize,
 				color
 			);
 
 			float offset = (m_fireworkType == FireworkType::Cone) ? EMath::DegToRad(EMath::randomf(-45, 45)) : EMath::DegToRad(EMath::randomf(-180, 180));
 			float x = cosf(theta + offset);
 			float y = sinf(theta + offset);
+
 			body->velocity = Vector2{ x, y } * EMath::randomf(2.0f, 10.0f);
-			body->gravityScale = EMath::randomf(0.5f, 1.0f);
+			body->damping = m_bodyDamping;
+
+			body->gravityScale = m_bodyGravityScale;
+			body->restitution = EMath::randomf(0.5f, 1.0f);
 		}
 	}
-
-	m_world->Step(dt);
 
 	for (auto& body : m_world->GetBodies())
 	{
 		if (body->position.y < -5)
 		{
 			body->position.y = -5;
-			body->velocity.y *= -0.5f;
+			body->velocity.y *= -body->restitution;
 		}
 		if (body->position.x < -9)
 		{
 			body->position.x = -9;
-			body->velocity.x *= -0.5f;
+			body->velocity.x *= -body->restitution;
 		}
 		if (body->position.x > 9)
 		{
 			body->position.x = 9;
-			body->velocity.x *= -0.5f;
+			body->velocity.x *= -body->restitution;
 		}
 	}
+}
+
+void VectorScene::FixedUpdate()
+{
+	m_world->Step(fixedTimeStep);
 }
 
 void VectorScene::Draw()
@@ -104,4 +114,21 @@ void VectorScene::Draw()
 
 void VectorScene::DrawGUI()
 {
+	if (TypeDropdownEditMode) GuiLock();
+
+	if (PhysicsWindowActive)
+	{
+		PhysicsWindowActive = !GuiWindowBox(Rectangle{ 48, 48, 264, 576 }, "Physics Settings");
+	}
+	GuiGroupBox(Rectangle{ 64, 88, 232, 48 }, "World");
+	GuiSlider(Rectangle{ 160, 104, 120, 16 }, "Gravity", NULL, &World::gravity.y, -20, 20);
+	GuiGroupBox(Rectangle{ 64, 152, 232, 184 }, "Bodies");
+	GuiLabel(Rectangle{ 128, 168, 32, 24 }, "Type");
+	GuiSlider(Rectangle{ 160, 208, 120, 16 }, "Size", NULL, &m_bodySize, 0, 0.5f);
+	GuiSlider(Rectangle{ 160, 240, 120, 16 }, "Mass", NULL, &m_bodyMass, 0, 100);
+	GuiSlider(Rectangle{ 160, 272, 120, 16 }, "Gravity Scale", NULL, &m_bodyGravityScale, 0.1f, 10);
+	GuiSlider(Rectangle{ 160, 304, 120, 16 }, "Damping", NULL, &m_bodyDamping, 0, 1);
+	if (GuiDropdownBox(Rectangle{ 160, 168, 120, 24 }, "STATIC;KINEMATIC;DYNAMIC", &m_bodyType, TypeDropdownEditMode)) TypeDropdownEditMode = !TypeDropdownEditMode;
+
+	GuiUnlock();
 }

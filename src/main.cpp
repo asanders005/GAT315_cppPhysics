@@ -36,10 +36,19 @@ int main ()
 	Scene* scene = new VectorScene("Vector Scene", screenWidth, screenHeight);
 	scene->Initialize();
 
+	SetTargetFPS(60);
+
+	float timeAccum = 0;
 	// game loop
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 	{
 		scene->Update();
+		timeAccum += GetFrameTime();
+		while (timeAccum >= Scene::fixedTimeStep)
+		{
+			scene->FixedUpdate();
+			timeAccum -= Scene::fixedTimeStep;
+		}
 		scene->BeginDraw();
 		scene->Draw();
 		scene->DrawGUI();

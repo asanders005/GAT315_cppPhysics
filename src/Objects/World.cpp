@@ -28,6 +28,14 @@ Body* World::CreateBody(const Vector2& position, float size, const Color& color)
     return body;
 }
 
+Body* World::CreateBody(int bodyType, const Vector2& position, float mass, float size, const Color& color)
+{
+	Body* body = new Body(static_cast<Body::Type>(bodyType), position, mass, size, color);
+	m_bodies.push_back(body);
+
+	return body;
+}
+
 void World::Step(float dt)
 {
 	for (auto& body : m_bodies)

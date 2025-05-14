@@ -541,6 +541,7 @@
     <ClInclude Include="..\..\src\Utility\MathUtils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\GUI\Gui.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\Objects\Body.cpp" />
     <ClCompile Include="..\..\src\Objects\World.cpp" />

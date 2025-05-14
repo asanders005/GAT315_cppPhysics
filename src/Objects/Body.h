@@ -47,6 +47,7 @@ public:
 	float invMass{ 1 };
 
 	float gravityScale{ 1 };
+	float restitution{ 0.5f }; 
 
 	float size{ 1 };
 	Color color{ WHITE };
