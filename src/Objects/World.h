@@ -2,6 +2,8 @@
 #include "raylib.h"
 #include <vector>
 
+using bodies_t = std::vector<struct Body*>;
+
 class World
 {
 public:
@@ -16,10 +18,10 @@ public:
 
 	void DestroyAll();
 
-	std::vector<struct Body*>& GetBodies() { return m_bodies; }
+	bodies_t& GetBodies() { return m_bodies; }
 
 	static Vector2 gravity;
 
 private:
-	std::vector<struct Body*> m_bodies;
+	bodies_t m_bodies;
 };

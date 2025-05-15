@@ -2,7 +2,6 @@
 #include "raylib.h"
 #include "raygui.h"
 #include "scene_camera.h"
-#include "Objects/World.h"
 #include <string>
 
 class Scene
@@ -41,5 +40,5 @@ protected:
 	Color m_background{ WHITE };
 
 	SceneCamera* m_camera{ nullptr };
-	World* m_world{ nullptr };
+	class World* m_world{ nullptr };
 };

@@ -25,6 +25,9 @@
     <Filter Include="Source Files\GUI">
       <UniqueIdentifier>{cf3c8c0a-6cdb-49ea-9873-68a708c5f85c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{7d4d4203-a581-4e22-9837-263c542589d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\resource_dir.h">
@@ -60,6 +63,9 @@
     <ClInclude Include="..\..\src\Utility\Integrator.h">
       <Filter>Source Files\Utitlity</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\Physics\Gravitation.h">
+      <Filter>Source Files\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
@@ -89,5 +95,6 @@
     <ClCompile Include="..\..\src\GUI\Gui.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Physics\Gravitation.cpp" />
   </ItemGroup>
 </Project>

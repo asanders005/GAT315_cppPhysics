@@ -1,4 +1,5 @@
 #include "Body.h"
+#include "World.h"
 #include "Scene/scene.h"
 #include "Utility/Integrator.h"
 
@@ -12,8 +13,6 @@ void Body::Step(float dt)
 	acceleration = force * invMass;
 
 	SemiImplicitIntegrator(*this, dt);
-
-	
 }
 
 void Body::Draw(const Scene& scene)
