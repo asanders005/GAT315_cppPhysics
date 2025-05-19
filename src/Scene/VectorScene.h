@@ -36,18 +36,4 @@ private:
 	ColorType m_colorType{ ColorType::Single };
 
 	bool m_isPaused{ false };
-
-	float m_gravitation{ 1.0f };
-
-	int m_bodyType{ 2 };
-	float m_bodySize{ 0.25f };
-	float m_bodyMass{ 1 };
-	float m_bodyGravityScale{ 1 };
-	float m_bodyDamping{ 0.5f };
-	float m_bodyRestitution{ 0.5f };
-
-private:
-	bool mouseOverGUI{ false };
-	bool PhysicsWindowActive{ true };
-	bool TypeDropdownEditMode{ false };
 };

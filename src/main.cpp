@@ -14,6 +14,7 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 #include "Scene/TrigScene.h"
 #include "Scene/PolarScene.h"
 #include "Scene/VectorScene.h"
+#include "Scene/SpringScene.h"
 
 int main ()
 {
@@ -33,7 +34,8 @@ int main ()
 
 	//Scene* scene = new TrigScene("Trig Scene", screenWidth, screenHeight);
 	//Scene* scene = new PolarScene("Polar Scene", screenWidth, screenHeight);
-	Scene* scene = new VectorScene("Vector Scene", screenWidth, screenHeight);
+	//Scene* scene = new VectorScene("Vector Scene", screenWidth, screenHeight);
+	Scene* scene = new SpringScene("Spring Scene", screenWidth, screenHeight);
 	scene->Initialize();
 
 	SetTargetFPS(60);
@@ -43,7 +45,7 @@ int main ()
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 	{
 		scene->Update();
-		timeAccum += GetFrameTime();
+		timeAccum += std::min(GetFrameTime(), 0.5f);
 		while (timeAccum >= Scene::fixedTimeStep)
 		{
 			scene->FixedUpdate();

@@ -6,9 +6,9 @@ struct Body
 public:
 	enum class Type
 	{
-		Static,
-		Kinematic,
 		Dynamic,
+		Kinematic,
+		Static,
 	};
 
 public:

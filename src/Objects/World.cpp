@@ -1,8 +1,7 @@
 #include "World.h"
 #include "Body.h"
 #include "Utility/MathUtils.h"
-
-Vector2 World::gravity{ 0, -9.81f };
+#include "Physics/Gravitation.h"
 
 World::~World()
 {
@@ -28,9 +27,9 @@ Body* World::CreateBody(const Vector2& position, float size, const Color& color)
     return body;
 }
 
-Body* World::CreateBody(int bodyType, const Vector2& position, float mass, float size, const Color& color)
+Body* World::CreateBody(Body::Type bodyType, const Vector2& position, float mass, float size, const Color& color)
 {
-	Body* body = new Body(static_cast<Body::Type>(bodyType), position, mass, size, color);
+	Body* body = new Body(bodyType, position, mass, size, color);
 	m_bodies.push_back(body);
 
 	return body;
@@ -38,6 +37,12 @@ Body* World::CreateBody(int bodyType, const Vector2& position, float mass, float
 
 void World::Step(float dt)
 {
+	if (!simulate) return;
+
+	
+	if (gravitation > 0) ApplyGravitation(m_bodies, gravitation);
+
+
 	for (auto& body : m_bodies)
 	{
 		body->Step(dt);

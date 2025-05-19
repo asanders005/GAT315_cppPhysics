@@ -530,12 +530,14 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\resource_dir.h" />
     <ClInclude Include="..\..\src\Coordinates\Polar.h" />
+    <ClInclude Include="..\..\src\GUI\Gui.h" />
     <ClInclude Include="..\..\src\Objects\Body.h" />
     <ClInclude Include="..\..\src\Objects\World.h" />
     <ClInclude Include="..\..\src\Physics\Gravitation.h" />
     <ClInclude Include="..\..\src\Scene\PolarScene.h" />
     <ClInclude Include="..\..\src\Scene\Scene.h" />
     <ClInclude Include="..\..\src\Scene\Scene_camera.h" />
+    <ClInclude Include="..\..\src\Scene\SpringScene.h" />
     <ClInclude Include="..\..\src\Scene\TrigScene.h" />
     <ClInclude Include="..\..\src\Scene\VectorScene.h" />
     <ClInclude Include="..\..\src\Utility\Integrator.h" />
@@ -543,6 +545,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\GUI\Gui.cpp" />
+    <ClCompile Include="..\..\src\GUI\RayGuiImplementation.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\Objects\Body.cpp" />
     <ClCompile Include="..\..\src\Objects\World.cpp" />
@@ -550,6 +553,7 @@
     <ClCompile Include="..\..\src\Scene\PolarScene.cpp" />
     <ClCompile Include="..\..\src\Scene\Scene.cpp" />
     <ClCompile Include="..\..\src\Scene\Scene_camera.cpp" />
+    <ClCompile Include="..\..\src\Scene\SpringScene.cpp" />
     <ClCompile Include="..\..\src\Scene\TrigScene.cpp" />
     <ClCompile Include="..\..\src\Scene\VectorScene.cpp" />
   </ItemGroup>

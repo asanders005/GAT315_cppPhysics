@@ -16,9 +16,6 @@
     <Filter Include="Source Files\Objects">
       <UniqueIdentifier>{2a679cdf-e7b1-458a-a2d1-f6ebcf35261c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Patterns">
-      <UniqueIdentifier>{a953f7b5-122f-4565-add6-41dd32f5544a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Utitlity">
       <UniqueIdentifier>{279104d0-8fc4-475d-a52b-1cb515dc3f31}</UniqueIdentifier>
     </Filter>
@@ -66,6 +63,12 @@
     <ClInclude Include="..\..\src\Physics\Gravitation.h">
       <Filter>Source Files\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\GUI\Gui.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Scene\SpringScene.h">
+      <Filter>Source Files\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
@@ -96,5 +99,11 @@
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Physics\Gravitation.cpp" />
+    <ClCompile Include="..\..\src\GUI\RayGuiImplementation.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Scene\SpringScene.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
