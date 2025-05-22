@@ -21,7 +21,7 @@ void SpringScene::Initialize()
 
 void SpringScene::Update()
 {
-	Gui::Update();
+	GUI::Update();
 
 	float dt = GetFrameTime();
 
@@ -35,7 +35,7 @@ void SpringScene::Update()
 		m_world->DestroyAll();
 	}
 
-	if (!Gui::mouseOverGUI)
+	if (!GUI::mouseOverGUI)
 	{
 		// Place Body
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
@@ -43,23 +43,41 @@ void SpringScene::Update()
 			Color color = ColorFromHSV(EMath::randomf(0, 360), 1.0f, 1.0f);
 
 			Body* body = m_world->CreateBody(
-				static_cast<Body::Type>(Gui::bodyType),
+				static_cast<Body::Type>(GUI::bodyTypeActive),
 				m_camera->ScreenToWorld(GetMousePosition()),
-				Gui::bodyMass,
-				Gui::bodySize,
+				GUI::massValue,
+				GUI::sizeValue,
 				color
 			);
 
-			body->damping = Gui::bodyDamping;
-			body->gravityScale = Gui::bodyGravityScale;
-			body->restitution = Gui::bodyRestitution;
+			body->damping = GUI::dampingValue;
+			body->gravityScale = GUI::gravityScaleValue;
+			body->restitution = GUI::restitutionValue;
 		}
 
 		// Select Body
 		if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
 		{
 			Vector2 position = m_camera->ScreenToWorld(GetMousePosition());
-			m_selectedBody = Gui::GetBodyIntersect(position, m_world->GetBodies(), *m_camera);
+			m_selectedBody = GUI::GetBodyIntersect(position, m_world->GetBodies(), *m_camera);
+		}
+		if (m_selectedBody)
+		{
+			if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+			{
+				Vector2 position = m_camera->ScreenToWorld(GetMousePosition());
+				m_connectBody = GUI::GetBodyIntersect(position, m_world->GetBodies(), *m_camera);
+			}
+			else
+			{
+				if (m_selectedBody && m_connectBody)
+				{
+					float distance = Vector2Distance(m_selectedBody->position, m_connectBody->position);
+					m_world->CreateSpring(m_selectedBody, m_connectBody, distance, GUI::stiffnessValue);
+				}
+				m_selectedBody = nullptr;
+				m_connectBody = nullptr;
+			}
 		}
 	}
 
@@ -98,6 +116,15 @@ void SpringScene::Draw()
 	if (m_selectedBody)
 	{
 		DrawCircleLine(m_selectedBody->position, m_selectedBody->size, YELLOW, 5);
+		if (m_connectBody)
+		{
+			DrawCircleLine(m_connectBody->position, m_connectBody->size, YELLOW, 5);
+			DrawLine(m_selectedBody->position, m_connectBody->position, 3, GREEN);
+		}
+		else
+		{
+			DrawLine(m_selectedBody->position, m_camera->ScreenToWorld(GetMousePosition()), 3, RED);
+		}
 	}
 
 	m_camera->EndMode();
@@ -105,5 +132,5 @@ void SpringScene::Draw()
 
 void SpringScene::DrawGUI()
 {
-	Gui::Draw();
+	GUI::Draw();
 }

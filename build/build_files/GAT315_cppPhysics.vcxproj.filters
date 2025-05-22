@@ -69,6 +69,9 @@
     <ClInclude Include="..\..\src\Scene\SpringScene.h">
       <Filter>Source Files\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\Objects\Spring.h">
+      <Filter>Source Files\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
@@ -98,12 +101,17 @@
     <ClCompile Include="..\..\src\GUI\Gui.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Physics\Gravitation.cpp" />
     <ClCompile Include="..\..\src\GUI\RayGuiImplementation.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Scene\SpringScene.cpp">
       <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Objects\Spring.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Physics\Gravitation.cpp">
+      <Filter>Source Files\Physics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

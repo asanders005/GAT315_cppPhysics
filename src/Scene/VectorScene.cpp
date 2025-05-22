@@ -21,7 +21,7 @@ void VectorScene::Initialize()
 
 void VectorScene::Update()
 {
-	Gui::Update();
+	GUI::Update();
 
 	if (IsKeyPressed(KEY_X))
 	{
@@ -48,7 +48,7 @@ void VectorScene::Update()
 	}
 
 	float theta = EMath::randomf(EMath::DegToRad(360));
-	if (!Gui::mouseOverGUI && (IsMouseButtonPressed(0) || IsMouseButtonDown(1)))
+	if (!GUI::mouseOverGUI && (IsMouseButtonPressed(0) || IsMouseButtonDown(1)))
 	{
 		Color color = ColorFromHSV(EMath::randomf(0, 360), 1.0f, 1.0f);
 		for (int i = 0; i < 100; i++)
@@ -63,10 +63,10 @@ void VectorScene::Update()
 			}
 
 			Body* body = m_world->CreateBody(
-				static_cast<Body::Type>(Gui::bodyType),
+				static_cast<Body::Type>(GUI::bodyTypeActive),
 				m_camera->ScreenToWorld(GetMousePosition()),
-				Gui::bodyMass,
-				Gui::bodySize,
+				GUI::massValue,
+				GUI::sizeValue,
 				color
 			);
 
@@ -75,10 +75,10 @@ void VectorScene::Update()
 			float y = sinf(theta + offset);
 
 			body->velocity = Vector2{ x, y } *EMath::randomf(2.0f, 10.0f);
-			body->damping = Gui::bodyDamping;
+			body->damping = GUI::dampingValue;
 
-			body->gravityScale = Gui::bodyGravityScale;
-			body->restitution = Gui::bodyRestitution;
+			body->gravityScale = GUI::gravityScaleValue;
+			body->restitution = GUI::restitutionValue;
 		}
 	}
 
@@ -121,5 +121,5 @@ void VectorScene::Draw()
 
 void VectorScene::DrawGUI()
 {
-	Gui::Draw();
+	GUI::Draw();
 }

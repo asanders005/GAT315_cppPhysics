@@ -1,7 +1,7 @@
 #include "World.h"
-#include "Body.h"
 #include "Utility/MathUtils.h"
 #include "Physics/Gravitation.h"
+#include "GUI/Gui.h"
 
 World::~World()
 {
@@ -35,13 +35,24 @@ Body* World::CreateBody(Body::Type bodyType, const Vector2& position, float mass
 	return body;
 }
 
+Spring* World::CreateSpring(Body* bodyA, Body* bodyB, float restLength, float stiffness)
+{
+	Spring* spring = new Spring(bodyA, bodyB, restLength, stiffness);
+	m_strings.push_back(spring);
+
+    return spring;
+}
+
 void World::Step(float dt)
 {
 	if (!simulate) return;
 
-	
 	if (gravitation > 0) ApplyGravitation(m_bodies, gravitation);
 
+	for (auto& spring : m_strings)
+	{
+		spring->ApplyForce(GUI::springDampingValue, springStiffness);
+	}
 
 	for (auto& body : m_bodies)
 	{
@@ -52,6 +63,10 @@ void World::Step(float dt)
 
 void World::Draw(const Scene& scene)
 {
+	for (auto& spring : m_strings)
+	{
+		spring->Draw(scene);
+	}
 	for (auto& body : m_bodies)
 	{
 		body->Draw(scene);
@@ -64,5 +79,11 @@ void World::DestroyAll()
 	{
 		delete body;
 	}
+
+	for (auto& spring : m_strings)
+	{
+		delete spring;
+	}
+
 	m_bodies.clear();
 }

@@ -1,40 +1,50 @@
 #include "Gui.h"
 
-#define GUI_DATA(data) TextFormat("%0.2f", data)
+#define GUI_DATA(data) TextFormat("%0.2f", data), &data
 
-void Gui::Update()
+void GUI::Initialize()
 {
-	mouseOverGUI = PhysicsWindowActive && CheckCollisionPointRec(GetMousePosition(), Rectangle{ 48, 48, 280, 576 });
-	if (IsKeyPressed(KEY_TAB)) PhysicsWindowActive = !PhysicsWindowActive;
+	GuiLoadStyle("../raygui/styles/cyber/style_cyber.rgs");
+	//GuiLoadStyle("../raygui/styles/terminal/style_terminal.rgs");
 }
 
-void Gui::Draw()
+void GUI::Update()
 {
-	if (TypeDropdownEditMode) GuiLock();
+	mouseOverGUI = physicsWindowBoxActive && CheckCollisionPointRec(GetMousePosition(), { anchor01.x + 0, anchor01.y + 0, 280, 504 });
+	if (IsKeyPressed(KEY_TAB)) physicsWindowBoxActive = !physicsWindowBoxActive;
+}
 
-	if (PhysicsWindowActive)
+void GUI::Draw()
+{
+	if (bodyTypeEditMode) GuiLock();
+
+	if (physicsWindowBoxActive)
 	{
-		PhysicsWindowActive = !GuiWindowBox(Rectangle{ 48, 48, 296, 576 }, "Physics Settings");
+		physicsWindowBoxActive = !GuiWindowBox(Rectangle{ anchor01.x + 0, anchor01.y + 0, 312, 464 }, "Physics");
+		GuiToggle(Rectangle{ anchor01.x + 96, anchor01.y + 424, 120, 24 }, "Simulate", &World::simulate);
 
-		GuiGroupBox(Rectangle{ 64, 88, 264, 80 }, "World");
-		GuiSlider(Rectangle{ 160, 104, 120, 16 }, "Gravity", GUI_DATA(World::gravity.y), &World::gravity.y, -20, 20);
-		GuiSlider(Rectangle{ 160, 136, 120, 16 }, "Gravitation", GUI_DATA(World::gravitation), &World::gravitation, 0, 20);
-		GuiGroupBox(Rectangle{ 64, 184, 264, 216 }, "Bodies");
-		GuiLabel(Rectangle{ 128, 200, 32, 24 }, "Type");
-		GuiSlider(Rectangle{ 160, 240, 120, 16 }, "Size", GUI_DATA(bodySize), &bodySize, 0.05f, 2.0f);
-		GuiSlider(Rectangle{ 160, 272, 120, 16 }, "Mass", GUI_DATA(bodyMass), &bodyMass, 0, 10);
-		GuiSlider(Rectangle{ 160, 304, 120, 16 }, "Gravity Scale", GUI_DATA(bodyGravityScale), &bodyGravityScale, 0.1f, 5);
-		GuiSlider(Rectangle{ 160, 336, 120, 16 }, "Damping", GUI_DATA(bodyDamping), &bodyDamping, 0, 1);
-		GuiSlider(Rectangle{ 160, 368, 120, 16 }, "Restitution", GUI_DATA(bodyRestitution), &bodyRestitution, 0, 1);
-		if (GuiDropdownBox(Rectangle{ 160, 200, 120, 24 }, "DYNAMIC;KINEMATIC;STATIC", &bodyType, TypeDropdownEditMode)) TypeDropdownEditMode = !TypeDropdownEditMode;
+		GuiGroupBox(Rectangle{ anchor02.x + 0, anchor02.y + 0, 256, 184 }, "Body");
+		GuiSliderBar(Rectangle{ anchor02.x + 96, anchor02.y + 16, 120, 16 }, "Mass", GUI_DATA(massValue), 0, 10);
+		GuiSliderBar(Rectangle{ anchor02.x + 96, anchor02.y + 40, 120, 16 }, "Size", GUI_DATA(sizeValue), 0.1f, 2.0f);
+		GuiSliderBar(Rectangle{ anchor02.x + 96, anchor02.y + 64, 120, 16 }, "Gravity Scale", GUI_DATA(gravityScaleValue), 0, 10);
+		GuiSliderBar(Rectangle{ anchor02.x + 96, anchor02.y + 88, 120, 16 }, "Damping", GUI_DATA(dampingValue), 0, 5);
+		GuiSliderBar(Rectangle{ anchor02.x + 96, anchor02.y + 112, 120, 16 }, "Restitution", GUI_DATA(restitutionValue), 0, 2);
+		GuiLabel(Rectangle{ anchor02.x + 24, anchor02.y + 136, 120, 24 }, "Body Type");
+		GuiGroupBox(Rectangle{ anchor03.x + 0, anchor03.y + 8, 256, 72 }, "Spring");
+		GuiSliderBar(Rectangle{ anchor03.x + 96, anchor03.y + 24, 120, 16 }, "Damping", GUI_DATA(springDampingValue), 0, 10);
+		GuiSliderBar(Rectangle{ anchor03.x + 96, anchor03.y + 48, 120, 16 }, "Stiffness", GUI_DATA(stiffnessValue), 0, 20);
+		GuiGroupBox(Rectangle{ anchor04.x + 0, anchor04.y + 0, 256, 72 }, "World");
+		GuiSliderBar(Rectangle{ anchor03.x + 96, anchor03.y + 112, 120, 16 }, "Gravitation", GUI_DATA(World::gravitation), 0, 20);
+		GuiSlider(Rectangle{ anchor04.x + 96, anchor04.y + 40, 120, 16 }, "Gravity", GUI_DATA(World::gravity.y), -20, 20);
+		if (GuiDropdownBox(Rectangle{ anchor02.x + 96, anchor02.y + 136, 120, 24 }, "Dynamic;Kinematic;Static", &bodyTypeActive, bodyTypeEditMode)) bodyTypeEditMode = !bodyTypeEditMode;
 	}
 
 	GuiUnlock();
 }
 
-Body* Gui::GetBodyIntersect(const Vector2& position, bodies_t& bodies, const SceneCamera& camera)
+Body* GUI::GetBodyIntersect(const Vector2& position, bodies_t& bodies, const SceneCamera& camera)
 {
-	for (auto& body : bodies)
+	for (auto body : bodies)
 	{
 		if (CheckCollisionPointCircle(position, body->position, body->size))
 		{

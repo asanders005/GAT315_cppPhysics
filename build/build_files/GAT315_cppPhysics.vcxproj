@@ -532,6 +532,7 @@
     <ClInclude Include="..\..\src\Coordinates\Polar.h" />
     <ClInclude Include="..\..\src\GUI\Gui.h" />
     <ClInclude Include="..\..\src\Objects\Body.h" />
+    <ClInclude Include="..\..\src\Objects\Spring.h" />
     <ClInclude Include="..\..\src\Objects\World.h" />
     <ClInclude Include="..\..\src\Physics\Gravitation.h" />
     <ClInclude Include="..\..\src\Scene\PolarScene.h" />
@@ -548,6 +549,7 @@
     <ClCompile Include="..\..\src\GUI\RayGuiImplementation.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\Objects\Body.cpp" />
+    <ClCompile Include="..\..\src\Objects\Spring.cpp" />
     <ClCompile Include="..\..\src\Objects\World.cpp" />
     <ClCompile Include="..\..\src\Physics\Gravitation.cpp" />
     <ClCompile Include="..\..\src\Scene\PolarScene.cpp" />
