@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Physics">
       <UniqueIdentifier>{7d4d4203-a581-4e22-9837-263c542589d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Collision">
+      <UniqueIdentifier>{9871ff85-e227-4f94-bae7-c53d313fb999}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\resource_dir.h">
@@ -71,6 +74,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\Objects\Spring.h">
       <Filter>Source Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Collision\AABB.h">
+      <Filter>Source Files\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

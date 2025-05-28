@@ -8,18 +8,20 @@ public:
 	struct Body* bodyA;
 	struct Body* bodyB;
 	float restLength;
+	float damping;
 	float k; // stiffness
 
 public:
 	Spring() = default;
-	Spring(Body* bodyA, Body* bodyB, float restLength, float k) :
+	Spring(Body* bodyA, Body* bodyB, float restLength, float k, float damping = 0) :
 		bodyA{ bodyA },
 		bodyB{ bodyB },
 		restLength{ restLength },
-		k{ k }
+		k{ k },
+		damping{ damping }
 	{}
 
-	void ApplyForce(float damping = 0.5f, float kMultiplier = 1);
+	void ApplyForce(float kMultiplier = 1);
 
 	void Draw(const Scene& scene);
 };

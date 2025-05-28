@@ -1,4 +1,5 @@
 #pragma once
+#include "Collision/AABB.h"
 #include "raylib.h"
 
 struct Body
@@ -9,6 +10,13 @@ public:
 		Dynamic,
 		Kinematic,
 		Static,
+	};
+
+	enum class ForceMode
+	{
+		Force,
+		Impulse,
+		Velocity,
 	};
 
 public:
@@ -32,8 +40,10 @@ public:
 	void Step(float dt);
 	void Draw(const class Scene& scene);
 
-	void ApplyForce(const Vector2& force);
+	void ApplyForce(const Vector2& force, ForceMode forceMode = ForceMode::Force);
 	void ClearForce() { force = { 0, 0 }; }
+
+	AABB GetAABB() const { return AABB{ position, { size * 2, size * 2 } }; }
 
 public:
 	Vector2 position{ 0, 0 };

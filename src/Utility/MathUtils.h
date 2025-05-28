@@ -1,4 +1,5 @@
 #pragma once
+#include "raylib.h"
 #include <cstdlib>
 #include <algorithm>
 
@@ -18,6 +19,12 @@ namespace EMath
 	{
 		if (min > max) std::swap(min, max);
 		return min + (randomf() * (max - min));
+	}
+
+	inline Vector2 randomOnUnitCircle()
+	{
+		float theta = randomf(0, 2 * PI);
+		return { cosf(theta), sinf(theta) };
 	}
 
 	inline float DegToRad(float degrees)

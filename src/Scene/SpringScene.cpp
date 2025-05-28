@@ -17,6 +17,8 @@ void SpringScene::Initialize()
 	m_camera = new SceneCamera(Vector2{ m_width / 2.0f, m_height / 2.0f });
 	m_world = new World();
 	m_world->Initialize();
+
+	GUI::Initialize();
 }
 
 void SpringScene::Update()
@@ -38,7 +40,7 @@ void SpringScene::Update()
 	if (!GUI::mouseOverGUI)
 	{
 		// Place Body
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && IsKeyDown(KEY_LEFT_CONTROL)))
 		{
 			Color color = ColorFromHSV(EMath::randomf(0, 360), 1.0f, 1.0f);
 
@@ -53,6 +55,8 @@ void SpringScene::Update()
 			body->damping = GUI::dampingValue;
 			body->gravityScale = GUI::gravityScaleValue;
 			body->restitution = GUI::restitutionValue;
+
+			body->ApplyForce(EMath::randomOnUnitCircle() * EMath::randomf(0.5f, 1.0f) * 5.0f, Body::ForceMode::Velocity);
 		}
 
 		// Select Body
@@ -73,7 +77,7 @@ void SpringScene::Update()
 				if (m_selectedBody && m_connectBody)
 				{
 					float distance = Vector2Distance(m_selectedBody->position, m_connectBody->position);
-					m_world->CreateSpring(m_selectedBody, m_connectBody, distance, GUI::stiffnessValue);
+					m_world->CreateSpring(m_selectedBody, m_connectBody, distance, GUI::stiffnessValue, GUI::dampingValue);
 				}
 				m_selectedBody = nullptr;
 				m_connectBody = nullptr;
@@ -81,21 +85,34 @@ void SpringScene::Update()
 		}
 	}
 
+	AABB worldAABB = m_camera->GetAABB();
 	for (auto& body : m_world->GetBodies())
 	{
-		if (body->position.y < -5)
+		AABB aabb = body->GetAABB();
+
+		if (aabb.min().y < worldAABB.min().y)
 		{
-			body->position.y = -5;
+			float overlap = worldAABB.min().y - aabb.min().y;
+			body->position.y += 2 * overlap;
 			body->velocity.y *= -body->restitution;
 		}
-		if (body->position.x < -9)
+		else if (aabb.max().y > worldAABB.max().y)
 		{
-			body->position.x = -9;
+			float overlap = worldAABB.max().y - aabb.max().y;
+			body->position.y += 2 * overlap;
+			body->velocity.y *= -body->restitution;
+		}
+
+		if (aabb.min().x < worldAABB.min().x)
+		{
+			float overlap = worldAABB.min().x - aabb.min().x;
+			body->position.x += 2 * overlap;
 			body->velocity.x *= -body->restitution;
 		}
-		if (body->position.x > 9)
+		else if (aabb.max().x > worldAABB.max().x)
 		{
-			body->position.x = 9;
+			float overlap = worldAABB.max().x - aabb.max().x;
+			body->position.x += 2 * overlap;
 			body->velocity.x *= -body->restitution;
 		}
 	}

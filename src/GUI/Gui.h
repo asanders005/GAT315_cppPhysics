@@ -32,8 +32,11 @@ public:
 	inline static  int bodyTypeActive = 0;
 	inline static  float springDampingValue = 0.5f;
 	inline static  float stiffnessValue = 5.0f;
+
 	inline static  float gravitationValue = 0.0f;
 	inline static  float gravityValue = 0.0f;
+	inline static float stiffnessMultiplier = 1;
+
 	inline static  bool simulateActive = true;
 	//----------------------------------------------------------------------------------
 };

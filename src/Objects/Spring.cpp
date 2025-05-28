@@ -2,14 +2,14 @@
 #include "Body.h"
 #include "raymath.h"
 
-void Spring::ApplyForce(float damping, float kMultiplier)
+void Spring::ApplyForce(float kMultiplier)
 {
 	// Step 1: Calculate direction vector from bodyB to bodyA
 	Vector2 direction = bodyA->position - bodyB->position;
 	float lengthSquared = Vector2LengthSqr(direction);
 
 	// Avoid division by zero or tiny spring length
-	if (lengthSquared < 0.01f) return;
+	if (lengthSquared < EPSILON) return;
 
 	// Step 2: Calculate spring displacement
 	float length = sqrtf(lengthSquared);
@@ -28,11 +28,11 @@ void Spring::ApplyForce(float damping, float kMultiplier)
 	Vector2 dampingForce = normalizedDirection * dampingAmount;
 
 	// Subtract damping from spring force
-	Vector2 totalForce = springForce - dampingForce;
+	springForce -= dampingForce;
 
 	// Step 6: Apply equal and opposite forces to the two bodies
-	bodyA->ApplyForce(totalForce);
-	bodyB->ApplyForce(totalForce * - 1);
+	bodyA->ApplyForce(springForce);
+	bodyB->ApplyForce(springForce * - 1);
 }
 
 void Spring::Draw(const Scene& scene)

@@ -529,6 +529,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\resource_dir.h" />
+    <ClInclude Include="..\..\src\Collision\AABB.h" />
     <ClInclude Include="..\..\src\Coordinates\Polar.h" />
     <ClInclude Include="..\..\src\GUI\Gui.h" />
     <ClInclude Include="..\..\src\Objects\Body.h" />

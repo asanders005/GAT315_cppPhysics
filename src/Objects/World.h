@@ -24,7 +24,7 @@ public:
 	bodies_t& GetBodies() { return m_bodies; }
 
 	//Spring
-	Spring* CreateSpring(Body* bodyA, Body* bodyB, float restLength, float stiffness);
+	Spring* CreateSpring(Body* bodyA, Body* bodyB, float restLength, float stiffness, float damping);
 
 	inline static Vector2 gravity{ 0, -9.81f };
 	inline static float gravitation{ 0.0f };
@@ -33,5 +33,5 @@ public:
 
 private:
 	bodies_t m_bodies;
-	springs_t m_strings;
+	springs_t m_springs;
 };
