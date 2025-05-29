@@ -2,6 +2,7 @@
 #include "Utility/MathUtils.h"
 #include "Physics/Gravitation.h"
 #include "GUI/Gui.h"
+#include "Collision/Collision.h"
 
 World::~World()
 {
@@ -24,7 +25,7 @@ Body* World::CreateBody(const Vector2& position, float size, const Color& color)
 	Body* body = new Body(position, size, color);
 	m_bodies.push_back(body);
 
-    return body;
+	return body;
 }
 
 Body* World::CreateBody(Body::Type bodyType, const Vector2& position, float mass, float size, const Color& color)
@@ -40,7 +41,7 @@ Spring* World::CreateSpring(Body* bodyA, Body* bodyB, float restLength, float st
 	Spring* spring = new Spring(bodyA, bodyB, restLength, stiffness, damping);
 	m_springs.push_back(spring);
 
-    return spring;
+	return spring;
 }
 
 void World::Step(float dt)
@@ -58,6 +59,13 @@ void World::Step(float dt)
 	{
 		body->Step(dt);
 		body->ClearForce();
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		CreateContacts(m_bodies, m_contacts);
+		SeparateContacts(m_contacts);
+		m_contacts.clear();
 	}
 }
 

@@ -530,6 +530,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\resource_dir.h" />
     <ClInclude Include="..\..\src\Collision\AABB.h" />
+    <ClInclude Include="..\..\src\Collision\Collision.h" />
+    <ClInclude Include="..\..\src\Collision\Contact.h" />
     <ClInclude Include="..\..\src\Coordinates\Polar.h" />
     <ClInclude Include="..\..\src\GUI\Gui.h" />
     <ClInclude Include="..\..\src\Objects\Body.h" />
@@ -546,6 +548,7 @@
     <ClInclude Include="..\..\src\Utility\MathUtils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\Collision\Collision.cpp" />
     <ClCompile Include="..\..\src\GUI\Gui.cpp" />
     <ClCompile Include="..\..\src\GUI\RayGuiImplementation.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
