@@ -65,6 +65,7 @@ void World::Step(float dt)
 	{
 		CreateContacts(m_bodies, m_contacts);
 		SeparateContacts(m_contacts);
+		ResolveContacts(m_contacts);
 		m_contacts.clear();
 	}
 }

@@ -56,7 +56,7 @@ void SpringScene::Update()
 			body->gravityScale = GUI::gravityScaleValue;
 			body->restitution = GUI::restitutionValue;
 
-			body->ApplyForce(EMath::randomOnUnitCircle() * EMath::randomf(0.5f, 1.0f) * 5.0f, Body::ForceMode::Velocity);
+			//body->ApplyForce(EMath::randomOnUnitCircle() * EMath::randomf(0.5f, 1.0f) * 5.0f, Body::ForceMode::Velocity);
 		}
 
 		// Select Body
