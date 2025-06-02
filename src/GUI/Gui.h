@@ -35,8 +35,9 @@ public:
 
 	inline static  float gravitationValue = 0.0f;
 	inline static  float gravityValue = 0.0f;
-	inline static float stiffnessMultiplier = 1;
+	inline static  float stiffnessMultiplier = 1;
 
 	inline static  bool simulateActive = true;
+	inline static  bool resetPressed = false;
 	//----------------------------------------------------------------------------------
 };

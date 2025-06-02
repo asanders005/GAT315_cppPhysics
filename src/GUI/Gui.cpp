@@ -20,7 +20,8 @@ void GUI::Draw()
 	if (physicsWindowBoxActive)
 	{
 		physicsWindowBoxActive = !GuiWindowBox(Rectangle{ anchor01.x + 0, anchor01.y + 0, 312, 496 }, "Physics");
-		GuiToggle(Rectangle{ anchor01.x + 96, anchor01.y + 456, 120, 24 }, "Simulate", &World::simulate);
+		GuiToggle(Rectangle{ anchor01.x + 24, anchor01.y + 456, 120, 24 }, "Simulate", &World::simulate);
+		resetPressed = GuiButton(Rectangle{ anchor01.x + 160, anchor01.y + 456, 120, 24 }, "Reset World");
 
 		GuiGroupBox(Rectangle{ anchor02.x + 0, anchor02.y + 0, 256, 184 }, "Body");
 		GuiSliderBar(Rectangle{ anchor02.x + 96, anchor02.y + 16, 120, 16 }, "Mass", GUI_DATA(massValue), 0, 10);

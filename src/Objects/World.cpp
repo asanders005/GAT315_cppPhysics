@@ -48,6 +48,11 @@ void World::Step(float dt)
 {
 	if (!simulate) return;
 
+	if (GUI::resetPressed)
+	{
+		DestroyAll();
+	}
+
 	if (gravitation > 0) ApplyGravitation(m_bodies, gravitation);
 
 	for (auto& spring : m_springs)
